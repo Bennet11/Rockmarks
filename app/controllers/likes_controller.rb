@@ -1,7 +1,9 @@
 class LikesController < ApplicationController
+
   def create
     @bookmark = Bookmark.find(params[:bookmark_id])
     @like = current_user.likes.build(bookmark: @bookmark)
+    @bookmark.topic = @topic
 
     if @like.save
       flash[:notice] = "Bookmark Liked"
@@ -15,6 +17,7 @@ class LikesController < ApplicationController
   def destroy
     @bookmark = Bookmark.find(params[:bookmark_id])
     @like = current_user.likes.find_by(bookmark: @bookmark)
+    @bookmark.topic = @topic
 
     if @like.destroy
       flash[:notice] = "Bookmark Unliked"
