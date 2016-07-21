@@ -1,3 +1,7 @@
 <h1 class="title"><%= @bookmark.url %></h1><br />
-  <%= link_to "Edit Bookmark", edit_topic_bookmark_path(@topic, @bookmark), class: 'btn btn-primary' %>
-  <%= link_to "Delete Bookmark", topic_bookmark_path(@topic, @bookmark), method: :delete, class: 'btn btn-danger', data: { confirm: 'Delete this Bookmark?' } %>
+  <% if policy(@bookmark).edit? %>
+      <%= link_to "Edit Bookmark", edit_topic_bookmark_path(@topic, @bookmark), class: 'btn btn-primary' %>
+  <% end %>
+  <% if policy(@bookmark).destroy? %>
+    <%= link_to "Delete Bookmark", [@topic, @bookmark], method: :delete, class: 'btn btn-danger', data: { confirm: 'Delete this Bookmark?' } %>
+  <% end %>
