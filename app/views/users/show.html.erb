@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <h2>My RockMarks</h2>
+    <div class="col-md-4">
+      <% @user_bookmarks.each do |bookmark, url| %>
+        <%= "##{@bookmark.topic.title}" %>
+        <br>
+        <%= link_to bookmark.url, topic_bookmark_path(@topic, bookmark) %> <%= link_to "Delete Bookmark", [@topic, @bookmark], method: :delete, class: 'btn btn-danger'%>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>
+  <br />
+<div class="container">
+  <div class="row">
+    <h2>Liked RockMarks</h2>
+    <div class="col-md-4">
+      <% @liked_bookmarks.each do |bookmark, url| %>
+        <%= "##{@topic.title}" %>
+        <br>
+        <%= link_to bookmark.url, topic_bookmark_path(@topic, bookmark) %> <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>
